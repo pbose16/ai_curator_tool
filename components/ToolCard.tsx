@@ -4,15 +4,24 @@ import { AiTool } from '../types';
 
 interface ToolCardProps {
   tool: AiTool;
+  onNavigate?: (route: string) => void;
 }
 
-const ToolCard: React.FC<ToolCardProps> = ({ tool }) => {
+const ToolCard: React.FC<ToolCardProps> = ({ tool, onNavigate }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    if (tool.internalRoute && onNavigate) {
+      e.preventDefault();
+      onNavigate(tool.internalRoute);
+    }
+  };
+
   return (
     <a 
       href={tool.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-6 p-5 rounded-[2.5rem] bg-[#0f172a] border border-white/5 hover:border-primary/30 transition-all duration-300 hover:scale-[1.01] hover:bg-white/[0.02] overflow-hidden"
+      target={tool.internalRoute ? undefined : "_blank"}
+      rel={tool.internalRoute ? undefined : "noopener noreferrer"}
+      onClick={handleClick}
+      className="group relative flex flex-col sm:flex-row items-start sm:items-center gap-6 p-5 rounded-[2.5rem] bg-[#0f172a] border border-white/5 hover:border-primary/30 transition-all duration-300 hover:scale-[1.01] hover:bg-white/[0.02] overflow-hidden cursor-pointer"
     >
       {/* Background Hover Glow */}
       <div className="absolute -left-10 top-0 w-32 h-full bg-gradient-to-r from-primary/5 to-transparent skew-x-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>

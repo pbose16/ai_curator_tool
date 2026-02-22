@@ -9,6 +9,21 @@ interface FilterBarProps {
   onSearchChange: (query: string) => void;
 }
 
+const CategoryButton: React.FC<{ category: ToolCategory; isActive: boolean; onClick: () => void }> = ({ category, isActive, onClick }) => (
+  <button
+    onClick={onClick}
+    className={`
+      px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 border
+      ${isActive 
+        ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.3)] transform scale-105' 
+        : 'bg-[#0f172a]/80 border-white/5 text-slate-400 hover:border-white/20 hover:text-white hover:bg-white/10'
+      }
+    `}
+  >
+    {category}
+  </button>
+);
+
 const FilterBar: React.FC<FilterBarProps> = ({ 
   currentCategory, 
   onCategoryChange, 
@@ -28,21 +43,6 @@ const FilterBar: React.FC<FilterBarProps> = ({
     ToolCategory.PRODUCTIVITY,
     ToolCategory.WRITING,
   ];
-
-  const CategoryButton = ({ category, isActive }: { category: ToolCategory, isActive: boolean }) => (
-    <button
-      onClick={() => onCategoryChange(category)}
-      className={`
-        px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 border
-        ${isActive 
-          ? 'bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.3)] transform scale-105' 
-          : 'bg-[#0f172a]/80 border-white/5 text-slate-400 hover:border-white/20 hover:text-white hover:bg-white/10'
-        }
-      `}
-    >
-      {category}
-    </button>
-  );
 
   return (
     <div className="flex flex-col gap-10 mb-16 max-w-5xl mx-auto">
@@ -101,6 +101,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                 key={category} 
                 category={category} 
                 isActive={currentCategory === category} 
+                onClick={() => onCategoryChange(category)}
               />
             ))}
           </div>
@@ -120,6 +121,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                 key={category} 
                 category={category} 
                 isActive={currentCategory === category} 
+                onClick={() => onCategoryChange(category)}
               />
             ))}
           </div>

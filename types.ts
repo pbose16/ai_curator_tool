@@ -17,4 +17,5 @@ export interface AiTool {
   category: ToolCategory;
   icon: string; // URL to an icon or emoji
   popular?: boolean;
+  internalRoute?: string;
 }

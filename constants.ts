@@ -61,6 +61,15 @@ export const AI_TOOLS: AiTool[] = [
     category: ToolCategory.PRODUCTIVITY,
     icon: '📓',
     popular: true
+  },
+  {
+    id: 'service-finder',
+    name: 'Service Finder',
+    description: 'Find local services near you with customizable search radius.',
+    url: '#',
+    category: ToolCategory.PRODUCTIVITY,
+    icon: '🔍',
+    internalRoute: 'service-finder'
   }
 ];
 
